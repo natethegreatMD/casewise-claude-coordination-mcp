@@ -1,0 +1,5 @@
+{
+  "max_parallel_sessions": 3,
+  "dangerous_permissions": true,
+  "default_timeout_minutes": 30
+}

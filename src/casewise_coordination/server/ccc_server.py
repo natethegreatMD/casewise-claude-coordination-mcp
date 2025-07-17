@@ -10,8 +10,8 @@ from pathlib import Path
 from typing import Dict, Any, Optional, List
 from datetime import datetime
 
-from mcp.server import Server, Request, Response
-from mcp.server.types import Tool, ToolResult
+from mcp.server import Server
+from mcp.server.models import InitializeResult
 from mcp.server.stdio import stdio_server
 
 from ..orchestrator import SessionOrchestrator

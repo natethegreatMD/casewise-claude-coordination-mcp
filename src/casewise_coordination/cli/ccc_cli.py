@@ -16,7 +16,6 @@ import os
 from ..orchestrator import SessionOrchestrator
 from ..orchestrator.task_distribution import TaskDistributor
 from ..session import SessionStatus
-from ..server import CCCServer
 
 
 class CCCCli:
