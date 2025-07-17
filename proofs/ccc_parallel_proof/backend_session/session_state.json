@@ -1,0 +1,7 @@
+{
+  "session_id": "backend-001",
+  "created": "2025-07-16 22:19:24",
+  "task": "You are a FastAPI specialist. Create an endpoint in api.py",
+  "status": "ready_to_execute",
+  "note": "In full CCC, this would be a real Claude session"
+}

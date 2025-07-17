@@ -1,0 +1,7 @@
+{
+  "session_id": "frontend-001",
+  "created": "2025-07-16 22:19:24",
+  "task": "You are a React specialist. Create a component called Button.tsx",
+  "status": "ready_to_execute",
+  "note": "In full CCC, this would be a real Claude session"
+}

@@ -1,0 +1,118 @@
+# CCC (Claude Code Coordinator) Permissions Audit
+# Created: 2025-07-17 - For Full Autonomous Operation
+
+## Current System Status
+- User: mike (uid=1000, gid=1000)
+- Groups: mike, adm, cdrom, sudo, dip, plugdev, users
+- Operating System: WSL2 Linux environment
+- Working Directory: /mnt/c/Users/Mike/Documents/CasewiseMD-workspace/Claude Code Coordinator
+
+## Available System Commands
+✅ bash: /usr/bin/bash
+✅ cp: /usr/bin/cp  
+✅ rm: /usr/bin/rm
+✅ git: /usr/bin/git
+✅ python3: /usr/bin/python3 (version 3.12.3)
+❌ pip: Not available (externally managed environment)
+
+## Permission Levels Required for CCC
+1. **File System Operations**: ✅ GRANTED
+   - Create/modify/delete files and directories
+   - Full read/write access to workspace
+   - Git repository operations
+
+2. **Process Management**: ⚠️ LIMITED
+   - Spawn subprocess for Claude Code CLI
+   - Monitor and manage child processes
+   - Kill/restart sessions if needed
+
+3. **Network Operations**: ✅ GRANTED
+   - HTTP requests for package downloads
+   - Git remote operations
+   - API calls to external services
+
+4. **Python Package Management**: ❌ BLOCKED
+   - pip/pip3 not available (externally managed)
+   - Cannot install Python packages globally
+   - Must use virtual environments or pipx
+
+5. **Sudo Access**: ❌ REQUIRES PASSWORD
+   - sudo requires interactive password entry
+   - Cannot perform system-level operations
+   - Package installation blocked
+
+## Critical Blockers for Full Autonomy
+1. **Python Package Installation**
+   - Problem: pip not available, externally managed environment
+   - Solution: Create virtual environment for CCC
+   - Alternative: Use pipx for application installs
+
+2. **System Package Installation**
+   - Problem: sudo requires password
+   - Solution: Pre-install required packages or use user-space alternatives
+   - Required packages: python3-venv, pipx, nodejs, npm
+
+3. **Claude Code CLI Installation**
+   - Problem: May require npm install -g or system packages
+   - Solution: User-space installation or pre-install
+
+## Solutions for Full CCC Autonomy
+
+### SOLUTION 1: Virtual Environment Setup (RECOMMENDED)
+```bash
+# Create dedicated CCC virtual environment
+python3 -m venv /mnt/c/Users/Mike/Documents/CasewiseMD-workspace/Claude Code Coordinator/ccc_venv
+source ccc_venv/bin/activate
+# Now pip works within venv for all Python packages
+```
+
+### SOLUTION 2: Pre-installation Script (RUN BEFORE SLEEP)
+```bash
+# Mike runs this once before going to sleep
+sudo apt update
+sudo apt install -y python3-full python3-venv pipx nodejs npm
+pipx install claude-cli  # If available via pipx
+npm install -g @anthropic/claude-code-cli  # If available via npm
+```
+
+### SOLUTION 3: Permissions Script for New Sessions
+```bash
+# Script to run in each new Claude session for full permissions
+export PATH="$HOME/.local/bin:$PATH"
+export CCC_VENV="/mnt/c/Users/Mike/Documents/CasewiseMD-workspace/Claude Code Coordinator/ccc_venv"
+source $CCC_VENV/bin/activate 2>/dev/null || python3 -m venv $CCC_VENV && source $CCC_VENV/bin/activate
+```
+
+## Required Pre-Installation for Full Autonomy
+Mike should run these commands before sleep:
+
+1. **System Packages** (requires sudo once):
+   ```bash
+   sudo apt update && sudo apt install -y python3-full python3-venv pipx nodejs npm git curl wget
+   ```
+
+2. **Python Environment Setup**:
+   ```bash
+   python3 -m venv /mnt/c/Users/Mike/Documents/CasewiseMD-workspace/Claude\ Code\ Coordinator/ccc_venv
+   ```
+
+3. **Claude Code CLI** (if available):
+   ```bash
+   # Try npm global install
+   npm install -g @anthropic/claude-code-cli
+   # OR try pipx
+   pipx install claude-cli
+   ```
+
+## Permission Status Summary
+- ✅ File operations: FULL ACCESS
+- ✅ Git operations: FULL ACCESS  
+- ✅ Process spawning: FULL ACCESS
+- ✅ Network operations: FULL ACCESS
+- ⚠️ Python packages: VENV REQUIRED
+- ❌ System packages: SUDO REQUIRED
+- ❌ Global installs: SUDO REQUIRED
+
+## Recommendation for Tonight
+Mike should run the pre-installation commands above before sleep to enable full CCC autonomy.
+Without these, CCC can still be built but with limitations on package installation.

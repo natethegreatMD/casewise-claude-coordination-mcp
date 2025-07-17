@@ -1,0 +1,50 @@
+# Sensitive files
+sudo_password.txt
+*_password.txt
+*.key
+*.pem
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+ccc_venv/
+venv/
+ENV/
+env/
+*.egg-info/
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# System
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Claude specific
+.claude/
+*.claude-backup
+
+# Context tracking
+context_checkpoint.json
+CONTEXT_ALERT.txt
+
+# Test outputs
+test_results/
+coverage/
