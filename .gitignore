@@ -3,6 +3,9 @@ sudo_password.txt
 *_password.txt
 *.key
 *.pem
+.env
+.env.local
+.env.*.local
 
 # Python
 __pycache__/
